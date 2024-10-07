@@ -12,8 +12,8 @@ import {
   getExperience,
   editExperience,
   deleteExperience,
-  addAvailability,
-  getInquiries,
+  // addAvailability,
+  // getInquiries,
   addService,
   getServices,
   updateService,
@@ -73,7 +73,11 @@ router.post(
   "/experience",
   verifyToken,
   requireAdmin,
-  upload.single("mainImage"),
+  upload.fields([
+    { name: "mainImage", maxCount: 1 }, // Single main image
+    { name: "experienceImages", maxCount: 10 }, // Multiple experience images
+    { name: "galleryImages", maxCount: 10 }, // Multiple gallery images
+  ]),
   addExperience
 );
 router.get("/experience", verifyToken, requireAdmin, getExperience);
@@ -81,33 +85,41 @@ router.put(
   "/experience/:id",
   verifyToken,
   requireAdmin,
-  upload.single("mainImage"),
+  upload.fields([
+    { name: "mainImage", maxCount: 1 }, // Single main image
+    { name: "experienceImages", maxCount: 10 }, // Multiple experience images
+    { name: "galleryImages", maxCount: 10 }, // Multiple gallery images
+  ]),
   editExperience
 );
 router.delete("/experience/:id", verifyToken, requireAdmin, deleteExperience);
 
 //Service Management
 router.post(
-  "/services",
+  "/manage-services",
   verifyToken,
   requireAdmin,
   upload.single("image"),
   addService
 );
-router.get("/services", verifyToken, requireAdmin, getServices);
+router.get("/manage-services", verifyToken, requireAdmin, getServices);
 router.put(
-  "/services/:id",
+  "/manage-services/:id",
   verifyToken,
   requireAdmin,
   upload.single("image"),
   updateService
 );
-router.delete("/services/:id", verifyToken, requireAdmin, deleteService);
+router.delete("/manage-services/:id", verifyToken, requireAdmin, deleteService);
 
 // Booking management
-router.post("/booking", verifyToken, requireAdmin, addAvailability);
+// router.post("/booking", verifyToken, requireAdmin, addAvailability);
 
-// Inquiry management
-router.get("/inquiries", verifyToken, requireAdmin, getInquiries);
+// // Inquiry management
+// // Route to get inquiries
+// router.get("/inquiries", verifyToken, requireAdmin, getInquiries);
+
+// // Route to send a reply to an inquiry
+// router.post("/contact/reply/:inquiryId", verifyToken, requireAdmin, replyToInquiry);
 
 export default router;

@@ -4,7 +4,7 @@ import Portfolio from "../models/portfolioModel.js";
 import About from "../models/aboutModel.js";
 import Experience from "../models/experienceModel.js";
 import Service from "../models/serviceModel.js";
-import Availability from "../models/availabilityModel.js";
+import Availability from "../models/bookingModel.js";
 import Inquiry from "../models/inquiryModel.js";
 
 // Get the directory name
@@ -332,7 +332,9 @@ export const editExperience = async (req, res) => {
       // Only delete the old image if it exists
       const oldMainImagePath = path.join(
         __dirname,
-        "../public/uploads",
+        "backend",
+          "public",
+          "uploads",
         experience.mainImage
       );
       if (fs.existsSync(oldMainImagePath)) {
@@ -359,17 +361,27 @@ export const deleteExperience = async (req, res) => {
         .json({ success: false, message: "Experience page not found" });
     }
 
-    fs.unlinkSync(
-      path.join(__dirname, "../backend/public/uploads", experience.mainImage)
-    );
+    const mainImagePath =
+      path.join(__dirname, "backend",
+      "public",
+      "uploads", experience.mainImage)
+    
     experience.experiences.forEach((exp) => {
       fs.unlinkSync(
-        path.join(__dirname, "../backend/public/uploads", exp.image)
+        path.join(__dirname, "backend",
+      "public",
+      "uploads", exp.image)
       );
     });
     experience.gallery.forEach((img) => {
-      fs.unlinkSync(path.join(__dirname, "../backend/public/uploads", img));
+      fs.unlinkSync(path.join(__dirname, "backend",
+      "public",
+      "uploads", img));
     });
+
+    if (fs.existsSync(mainImagePath)) {
+      fs.unlinkSync(mainImagePath); // Delete image1
+    }
 
     res
       .status(200)
@@ -472,13 +484,13 @@ export const addAvailability = async (req, res) => {
   }
 };
 
-export const getInquiries = async (req, res) => {
-  console.log("Received request for inquiries"); // Add this line
-  try {
-    const inquiries = await Inquiry.find();
-    res.status(200).json({ success: true, inquiries });
-  } catch (error) {
-    console.error("Error fetching inquiries:", error);
-    res.status(500).json({ success: false, message: error.message });
-  }
-};
+// export const getInquiries = async (req, res) => {
+//   console.log("Received request for inquiries"); // Add this line
+//   try {
+//     const inquiries = await Inquiry.find();
+//     res.status(200).json({ success: true, inquiries });
+//   } catch (error) {
+//     console.error("Error fetching inquiries:", error);
+//     res.status(500).json({ success: false, message: error.message });
+//   }
+// };

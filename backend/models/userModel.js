@@ -17,8 +17,8 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['admin', 'client'],
-      default: 'client',
+      enum: ["admin", "client"],
+      default: "client",
     },
     lastLogin: {
       type: Date,
@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema(
     resetPasswordExpiresAt: Date,
     verificationToken: String,
     verificationTokenExpiresAt: Date,
+    profileImage: {
+      type: String,
+      default: "default.png", // Set a default image path or URL
+    },
   },
   { timestamps: true }
 );

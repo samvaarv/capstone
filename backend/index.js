@@ -8,6 +8,10 @@ import { connectDB } from "./db/connectDB.js";
 import { User } from "./models/userModel.js";
 import authRoutes from "./routes/authRoute.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
+import notificationRoutes from './routes/notificationRoutes.js';
+import bookingRoutes from './routes/bookingRoutes.js';
+import serviceRoutes from './routes/serviceRoutes.js';
 
 dotenv.config();
 
@@ -48,6 +52,11 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api", contactRoutes);
+// Register notifications route
+app.use("/api", notificationRoutes);
+app.use("/api", bookingRoutes);
+app.use("/api", serviceRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));

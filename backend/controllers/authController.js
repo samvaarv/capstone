@@ -27,7 +27,7 @@ export const signup = async (req, res) => {
 
     const hashedPassword = await bcryptjs.hash(password, 10);
 
-    const role = email === "samvaarv.vid@gmail.com" ? "admin" : "client";
+    const role = email === `${process.env.ADMIN_EMAIL}` ? "admin" : "client";
     const verificationToken = Math.floor(
       100000 + Math.random() * 900000
     ).toString();
@@ -218,5 +218,68 @@ export const checkAuth = async (req, res) => {
   } catch (error) {
     console.log("Error in checkAuth", error);
     res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// Update profile (name and image)
+export const updateProfile = async (req, res) => {
+  console.log('Update Profile Route Hit');  // Add a log to see if it hits
+  console.log(req.body);
+  const { name } = req.body;
+  const profileImage = req.file ? req.file.filename : null; // Check if a new image is uploaded
+  const userId = req.user._id;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Update name and image (if provided)
+    user.name = name || user.name;
+    if (profileImage) {
+      user.profileImage = profileImage;
+    }
+
+    await user.save();
+    res.status(200).json({ success: true, message: "Profile updated successfully", user });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ success: false, message: "Error updating profile" });
+  }
+};
+
+// Change password
+export const changePassword = async (req, res) => {
+  const { currentPassword, newPassword, confirmPassword } = req.body;
+  const userId = req.user._id;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Check if the current password is correct
+    const isMatch = await bcryptjs.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ success: false, message: "Incorrect current password" });
+    }
+
+    // Check if new password and confirm password match
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({ success: false, message: "New passwords do not match" });
+    }
+
+    // Hash the new password and save it
+    const salt = await bcryptjs.genSalt(10);
+    user.password = await bcryptjs.hash(newPassword, salt);
+
+    await user.save();
+    res.status(200).json({ success: true, message: "Password changed successfully" });
+  } catch (error) {
+    console.error("Error changing password:", error);
+    res.status(500).json({ success: false, message: "Error changing password" });
   }
 };

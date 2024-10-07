@@ -14,14 +14,22 @@ import ServiceManagement from "./pages/ServiceManagement";
 import BookingManagement from "./pages/BookingManagement";
 import ContactManagement from "./pages/ContactManagement";
 
+import ClientDashboardPage from "./pages/ClientDashboardPage";
+import Navbar from "./components/Navbar";
+
 import LoadingSpinner from "./components/LoadingSpinner";
 
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
+import ContactForm from "./pages/ContactForm";
+import ProfileForm from "./pages/ProfileForm";
+import ChangePasswordForm from "./pages/ChangePasswordForm";
+import ServicePage from "./pages/ServicePage";
+import UserBookingPage from "./pages/UserBookingPage";
 
 // protect routes that require authentication
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, role }) => {
   const { isAuthenticated, user } = useAuthStore();
 
   if (!isAuthenticated) {
@@ -30,6 +38,10 @@ const ProtectedRoute = ({ children }) => {
 
   if (!user.isVerified) {
     return <Navigate to="/verify-email" replace />;
+  }
+
+  if (role && user.role !== role) {
+    return <Navigate to="/" replace />; // Redirect if role doesn't match
   }
 
   return children;
@@ -60,11 +72,12 @@ function App() {
       className="min-h-screen bg-gradient-to-br
     from-gray-900 via-green-900 to-emerald-900 flex items-center justify-center relative overflow-hidden"
     >
+      <Navbar />
       <Routes>
         <Route
-          path="/"
+          path="/dashboard"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute role="admin">
               <DashboardPage />
             </ProtectedRoute>
           }
@@ -107,7 +120,7 @@ function App() {
         <Route
           path="/portfolio"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute role="admin">
               <PortfolioManagement />
             </ProtectedRoute>
           }
@@ -115,7 +128,7 @@ function App() {
         <Route
           path="/about"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute role="admin">
               <AboutManagement />
             </ProtectedRoute>
           }
@@ -123,15 +136,15 @@ function App() {
         <Route
           path="/experience"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute role="admin">
               <ExperienceManagement />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/services"
+          path="/manage-services"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute role="admin">
               <ServiceManagement />
             </ProtectedRoute>
           }
@@ -140,21 +153,67 @@ function App() {
         <Route
           path="/booking"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute role="admin">
               <BookingManagement />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/contact"
+          path="/inquiries"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute role="admin">
               <ContactManagement />
             </ProtectedRoute>
           }
         />
+
+        <Route path="/contact" element={<ContactForm />} />
+        <Route path="/services" element={<ServicePage />} />
+        <Route path="/book-service/:id" element={<UserBookingPage />} />
+
+        {/* Client Routes */}
+        <Route
+          path="/client/dashboard"
+          element={
+            <ProtectedRoute role="client">
+              <ClientDashboardPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* <Route
+          path="/client/profile"
+          element={
+            <ProtectedRoute role="client">
+              <ProfileManagement />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/client/inquiries"
+          element={
+            <ProtectedRoute role="client">
+              <ClientInquiries />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/client/booking"
+          element={
+            <ProtectedRoute role="client">
+              <BookingManagement />
+            </ProtectedRoute>
+          }
+        /> */}
+      <Route path="/update-profile" element={<ProfileForm />} />
+      <Route path="/change-password" element={<ChangePasswordForm />} />
+
         {/* catch all routes */}
         <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
       </Routes>
       <Toaster />
     </div>

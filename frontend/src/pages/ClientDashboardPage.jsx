@@ -1,15 +1,46 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/authStore";
 import { formatDate } from "../utils/date";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const DashboardPage = () => {
+const ClientDashboardPage = () => {
   const { user, logout } = useAuthStore();
   const BACKEND_URL = "http://localhost:8888"; // Base URL for the backend
 
   const handleLogout = () => {
     logout();
   };
+
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get("/api/notifications");
+        setNotifications(response.data.notifications);
+      } catch (error) {
+        console.error("Error fetching notifications", error);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
+
+  const markAsRead = async (notificationId) => {
+    try {
+      await axios.post(`/api/notifications/${notificationId}/read`);
+      toast.success("Notification marked as read.");
+      setNotifications((prev) =>
+        prev.filter((notification) => notification._id !== notificationId)
+      );
+    } catch (error) {
+      console.error("Error marking notification as read", error);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -19,70 +50,37 @@ const DashboardPage = () => {
       className="max-w-md w-full mx-auto mt-10 p-8 bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-xl shadow-2xl border border-gray-800"
     >
       <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-emerald-600 text-transparent bg-clip-text">
-        Dashboard
+        Client Dashboard
       </h2>
 
-      {/* Role-based Navigation */}
-      {user.role === "admin" ? (
-        <nav className="mb-6">
-          <ul className="space-y-2">
-            <li>
-              <Link to="/portfolio" className="text-green-400 hover:underline">
-                Manage Portfolio
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="text-green-400 hover:underline">
-                Manage About Section
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/experience"
-                className="text-green-400 hover:underline"
-              >
-                Manage Experience
-              </Link>
-            </li>
-            <li>
-              <Link to="/manage-services" className="text-green-400 hover:underline">
-                Manage Services
-              </Link>
-            </li>
-            <li>
-              <Link to="/booking" className="text-green-400 hover:underline">
-                Manage Booking
-              </Link>
-            </li>
-            <li>
-              <Link to="/inquiries" className="text-green-400 hover:underline">
-                View Inquiries
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      ) : (
-        <nav className="mb-6">
-          <ul className="space-y-2">
-            <li>
-              <Link
-                to="/client/booking"
-                className="text-green-400 hover:underline"
-              >
-                My Bookings
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/client/inquiries"
-                className="text-green-400 hover:underline"
-              >
-                My Inquiries
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      )}
+      <nav className="mb-6">
+        <ul className="space-y-2">
+          <li>
+            <Link
+              to="/client/booking"
+              className="text-green-400 hover:underline"
+            >
+              Manage Your Bookings
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/client/inquiries"
+              className="text-green-400 hover:underline"
+            >
+              View Your Inquiries
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/client/profile"
+              className="text-green-400 hover:underline"
+            >
+              Manage Profile
+            </Link>
+          </li>
+        </ul>
+      </nav>
 
       <div className="space-y-6">
         <motion.div
@@ -115,11 +113,6 @@ const DashboardPage = () => {
               day: "numeric",
             })}
           </p>
-          <p className="text-gray-300">
-            <span className="font-bold">Last Login: </span>
-
-            {formatDate(user.lastLogin)}
-          </p>
         </motion.div>
       </div>
       <div>
@@ -130,6 +123,26 @@ const DashboardPage = () => {
           <button>Change Password</button>
         </Link>
       </div>
+
+      <div className="max-w-4xl mx-auto mt-10">
+      <h2 className="text-3xl font-bold mb-6 text-center">Your Notifications</h2>
+      {notifications.length === 0 ? (
+        <p>No notifications.</p>
+      ) : (
+        notifications.map((notification) => (
+          <div key={notification._id} className="p-4 border mb-4">
+            <p>{notification.message}</p>
+            <p className="text-gray-500">Received on: {new Date(notification.createdAt).toLocaleString()}</p> {/* Date and time */}
+            <button
+              onClick={() => markAsRead(notification._id)}
+              className="bg-green-500 text-white py-2 px-4 rounded mt-2"
+            >
+              Mark as Read
+            </button>
+          </div>
+        ))
+      )}
+    </div>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -151,4 +164,5 @@ const DashboardPage = () => {
     </motion.div>
   );
 };
-export default DashboardPage;
+
+export default ClientDashboardPage;

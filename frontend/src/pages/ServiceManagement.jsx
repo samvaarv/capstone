@@ -33,7 +33,7 @@ const ServiceManagement = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get("/api/admin/services");
+        const response = await axios.get("/api/admin/manage-services");
         if (response.data.success) {
           setServices(response.data.services);
         }
@@ -69,7 +69,7 @@ const ServiceManagement = () => {
     formData.append("image", newImage);
 
     try {
-      await axios.post("/api/admin/services", formData, {
+      await axios.post("/api/admin/manage-services", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -79,7 +79,7 @@ const ServiceManagement = () => {
       setNewDescription("");
       setNewPrice("");
       setNewImage(null);
-      const response = await axios.get("/api/admin/services");
+      const response = await axios.get("/api/admin/manage-services");
       setServices(response.data.services);
     } catch (error) {
       console.error("Error adding service:", error);
@@ -108,7 +108,7 @@ const ServiceManagement = () => {
     }
 
     try {
-      await axios.put(`/api/admin/services/${serviceId}`, formData, {
+      await axios.put(`/api/admin/manage-services/${serviceId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -116,7 +116,7 @@ const ServiceManagement = () => {
       toast.success("Service updated successfully");
       setEditingService(null); // Exit edit mode
       setEditImage(null); // Clear the image upload
-      const response = await axios.get("/api/admin/services");
+      const response = await axios.get("/api/admin/manage-services");
       setServices(response.data.services);
     } catch (error) {
       console.error("Error updating service:", error);
@@ -130,10 +130,10 @@ const ServiceManagement = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`/api/admin/services/${serviceToDelete._id}`);
+      await axios.delete(`/api/admin/manage-services/${serviceToDelete._id}`);
       toast.success("Service deleted successfully");
       setDeleteConfirmationOpen(false); // Close the confirmation modal
-      const response = await axios.get("/api/admin/services");
+      const response = await axios.get("/api/admin/manage-services");
       setServices(response.data.services);
     } catch (error) {
       console.error("Error deleting service:", error);

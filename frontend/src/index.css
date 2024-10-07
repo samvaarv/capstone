@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.time-slot-button {
+    margin: 5px;
+    padding: 10px;
+    background-color: lightgray;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .time-slot-button.selected {
+    background-color: green;
+    color: white;
+  }
+  

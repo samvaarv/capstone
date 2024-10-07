@@ -14,6 +14,8 @@
     "framer-motion": "^11.9.0",
     "lucide-react": "^0.446.0",
     "react": "^18.3.1",
+    "react-calendar": "^5.0.0",
+    "react-datepicker": "^7.4.0",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.26.2",

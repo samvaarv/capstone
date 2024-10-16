@@ -181,7 +181,7 @@ const ClientBooking = () => {
               </button>
               <button
                 onClick={confirmCancellation} // Confirm cancellation
-                className="bg-red5400 text-white text-xs uppercase py-2 px-5 hover:bg-red-700 transition mt-3"
+                className="bg-red5400 text-white text-xs uppercase py-2 px-5 bg-red-500 hover:bg-red-700 transition mt-3"
               >
                 Confirm Cancellation
               </button>

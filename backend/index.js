@@ -8,7 +8,7 @@ import cron from "node-cron";
 import { cleanupExpiredBookings } from "./controllers/bookingController.js";
 
 import { connectDB } from "./db/connectDB.js";
-import { User } from "./models/userModel.js";
+import User from "./models/userModel.js";
 import authRoutes from "./routes/authRoute.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
@@ -31,7 +31,9 @@ app.use(bodyParser.json());
 
 app.use(
   cors({
-    origin: "https://photographer-appointment-booking.onrender.com/" || "http://localhost:5173",
+    origin:
+      "https://photographer-appointment-booking.onrender.com/" ||
+      "http://localhost:5173",
     credentials: true,
     exposedHeaders: [
       "Content-Range",

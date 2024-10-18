@@ -12,7 +12,7 @@ import { verifyToken } from "../middleware/verifyToken.js";
 import { requireAdmin } from "../middleware/requireAdmin.js";
 import UserBooking from "../models/userBookingModel.js";
 import Booking from "../models/bookingModel.js";
-import { User } from "../models/userModel.js";
+import User from "../models/userModel.js";
 
 import { sendCancellationEmail } from "../sendGrid/emails.js"; // Add your email logic
 

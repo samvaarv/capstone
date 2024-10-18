@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/userModel.js";
+import User from "../models/userModel.js";
 
 export const verifyToken = async (req, res, next) => {
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
@@ -11,7 +11,7 @@ export const verifyToken = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
+
     req.userId = decoded.userId;
 
     // Fetch the user from the database

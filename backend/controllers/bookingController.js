@@ -1,7 +1,7 @@
 import Booking from "../models/bookingModel.js";
 import UserBooking from "../models/userBookingModel.js";
 import sendgrid from "@sendgrid/mail";
-import { User } from "../models/userModel.js";
+import User from "../models/userModel.js";
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 

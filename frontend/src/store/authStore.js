@@ -141,5 +141,5 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  setUser: (user) => set({ user }),
+  setUser: (user) => set(User),
 }));

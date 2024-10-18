@@ -8,7 +8,7 @@ import {
   sendPassswordResetEmail,
   sendResetSuccessfulEmail,
 } from "../sendGrid/emails.js";
-import { User } from "../models/userModel.js";
+import User from "../models/userModel.js";
 
 export const signup = async (req, res) => {
   const { email, password, name } = req.body;

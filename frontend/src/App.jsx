@@ -25,7 +25,7 @@ import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
 
 import HomePage from "./pages/HomePage";
-import ContactForm from "./pages/ContactForm";
+import ContactPage from "./pages/ContactPage";
 import ServicePage from "./pages/ServicePage";
 import UserBookingPage from "./pages/UserBookingPage";
 import AboutPage from "./pages/AboutPage";
@@ -203,7 +203,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/portfolio" element={<PortfolioList />} />
           <Route path="/portfolio/:id" element={<PortfolioDetail />} />
-          <Route path="/contact" element={<ContactForm />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/services" element={<ServicePage />} />
           <Route path="/book-service/:id" element={<UserBookingPage />} />
 

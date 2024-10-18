@@ -83,7 +83,7 @@ const Homepage = () => {
               {homepageData.heroTitle}
             </h2>
           </div>
-          <div className="row-start-4 row-span-2 col-start-8 col-span-4 z-50 text-center md:text-left mt-5 md:mt-0">
+          <div className="row-start-4 row-span-2 col-start-8 col-span-4 z-20 text-center md:text-left mt-5 md:mt-0">
             <p className="text-sm md:text-md tracking-2 mb-6">
               {homepageData.heroDescription}
             </p>

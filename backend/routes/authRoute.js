@@ -11,7 +11,7 @@ import {
   changePassword,
 } from "../controllers/authController.js";
 import { verifyToken } from "../middleware/verifyToken.js";
-import { requireAdmin } from "../middleware/requireAdmin.js";
+import protectRoute from "../middleware/requireAdmin.js";
 import upload from "../middleware/multer.js";
 
 const router = express.Router();
@@ -28,9 +28,9 @@ router.post("/forgot-password", forgotPassword);
 router.post("/reset-password/:token", resetPassword);
 
 // Update user profile (name and image)
-router.put("/update-profile", verifyToken, upload.single("profileImage"), updateProfile);
+router.put("/update-profile", protectRoute, upload.single("profileImage"), updateProfile);
 
 // Change password
-router.put("/change-password", verifyToken, changePassword);
+router.put("/change-password", protectRoute, changePassword);
 
 export default router;

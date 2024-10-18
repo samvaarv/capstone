@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Input from "../components/Input";
 import "react-toastify/dist/ReactToastify.css";
 
-const ContactForm = () => {
+const ContactPage = () => {
   const { user, isAuthenticated } = useAuthStore();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -118,4 +118,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default ContactPage;

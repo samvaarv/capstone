@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/user.model.js";
+import User from "../models/userModel.js";
 
 export const requireAdmin = (req, res, next) => {
   if (req.user && req.user.role === "admin") {

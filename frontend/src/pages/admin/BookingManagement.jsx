@@ -106,7 +106,7 @@ const BookingManagement = () => {
       <Calendar
         onChange={setSelectedDate}
         value={selectedDate}
-        tileDisabled={({ date }) => date < new Date()} // Disable past dates
+        tileDisabled={({ date }) => date <= new Date()} // Disable past dates
       />
 
       <h3 className="uppercase my-6">Select Time Slots for <strong>{selectedDate.toDateString()}</strong></h3>

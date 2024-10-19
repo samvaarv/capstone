@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import path from "path";
 import cron from "node-cron";
+import helmet from "helmet";
 import { cleanupExpiredBookings } from "./controllers/bookingController.js";
 
 import { connectDB } from "./db/connectDB.js";
@@ -43,16 +44,18 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
-  res.setHeader(
-    "Content-Security-Policy",
-    "default-src 'self'; img-src 'self' data:; script-src 'self';"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader(
+//     "Content-Security-Policy",
+//     "default-src 'self'; img-src 'self' data:; script-src 'self';"
+//   );
+//   next();
+// });
 
 app.use(express.json());
 app.use(cookieParser());
+
+
 
 // Serve static files from the uploads directory
 app.use(

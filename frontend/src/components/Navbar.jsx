@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import {ChevronDown} from "lucide-react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
@@ -89,7 +90,7 @@ const Navbar = () => {
                     {user ? (
                       <Menu as="div" className="relative">
                         <div>
-                          <Menu.Button className="flex rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <Menu.Button className="flex items-center rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <img
                               className="h-8 w-8 rounded-full object-cover text-xs uppercase"
                               src={`${
@@ -97,6 +98,7 @@ const Navbar = () => {
                               }/uploads/${user.profileImage}`}
                               alt={user.name.split(" ")[0]}
                             />
+                            <span className="bg-primary-2 rounded-r-full -ml-2 pl-2 pr-1"><ChevronDown className="w-4" /></span>
                           </Menu.Button>
                         </div>
                         <Transition

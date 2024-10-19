@@ -87,7 +87,7 @@ export const replyToInquiry = async (req, res) => {
   
       // Create a notification for the client
       const notification = new Notification({
-        user: inquiry.email, // Assuming notifications are linked to email or user ID
+        user: inquiry.email,
         message: `You have received a reply to your inquiry. Check your email for more details.`,
       });
       await notification.save();

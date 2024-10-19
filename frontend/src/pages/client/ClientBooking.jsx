@@ -20,16 +20,52 @@ const ClientBooking = () => {
         const response = await axios.get("/api/client/bookings", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const today = new Date().toISOString().split("T")[0];
 
-        const upcoming = response.data.filter(
-          (booking) =>
-            new Date(booking.date).toISOString().split("T")[0] >= today
-        );
-        const past = response.data.filter(
-          (booking) =>
-            new Date(booking.date).toISOString().split("T")[0] < today
-        );
+        const now = new Date(); // Get current date and time
+        const todayDate = now.toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+
+        // Function to convert "1:30 PM" into a Date object for time comparison
+        const parseTimeSlot = (timeSlot) => {
+          const [time, modifier] = timeSlot.split(" ");
+          let [hours, minutes] = time.split(":");
+
+          if (modifier === "PM" && hours !== "12") {
+            hours = parseInt(hours, 10) + 12;
+          } else if (modifier === "AM" && hours === "12") {
+            hours = "00";
+          }
+          return new Date(`1970-01-01T${hours}:${minutes}:00`);
+        };
+
+        const upcoming = [];
+        const past = [];
+
+        response.data.forEach((booking) => {
+          const bookingDate = new Date(booking.date)
+            .toISOString()
+            .split("T")[0];
+          const bookingTime = parseTimeSlot(booking.timeSlot); // Convert timeSlot to a Date object
+          const currentTime = new Date(
+            `1970-01-01T${now.getHours()}:${now.getMinutes()}:00`
+          );
+
+          if (bookingDate < todayDate) {
+            // Booking is in the past (before today)
+            past.push(booking);
+          } else if (bookingDate > todayDate) {
+            // Booking is in the future (after today)
+            upcoming.push(booking);
+          } else {
+            // Booking is for today, compare times
+            if (bookingTime <= currentTime) {
+              // If booking time is earlier than or equal to current time, move to past bookings
+              past.push(booking);
+            } else {
+              // If booking time is later than current time, keep it in upcoming
+              upcoming.push(booking);
+            }
+          }
+        });
 
         setUpcomingBookings(upcoming);
         setPastBookings(past);

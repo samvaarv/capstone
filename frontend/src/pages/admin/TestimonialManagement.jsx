@@ -60,13 +60,13 @@ const TestimonialManagement = () => {
         Manage Testimonials
       </h3>
       {testimonials.length > 0 ? (
-        <ul className="grid grid-cols-2 gap-4">
+        <ul className="grid md:grid-cols-2 gap-4">
           {testimonials.map((testimonial) => (
-            <li key={testimonial._id} className="border border-dark p-4 mb-2">
+            <li key={testimonial._id} className="border border-dark p-4 mb-4">
               <TestimonialItemAdmin testimonial={testimonial} />
               <button
                 onClick={() => handleDelete(testimonial)}
-                className="bg-red-500 text-white text-xs uppercase py-2 px-5 hover:bg-red-700 transition"
+                className="bg-red-500 text-white text-xs uppercase py-2 px-5 mt-4 hover:bg-red-700 transition"
               >
                 Delete
               </button>

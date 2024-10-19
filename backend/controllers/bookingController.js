@@ -2,6 +2,7 @@ import Booking from "../models/bookingModel.js";
 import UserBooking from "../models/userBookingModel.js";
 import sendgrid from "@sendgrid/mail";
 import User from "../models/userModel.js";
+import Notification from "../models/notificationModel.js";
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -112,9 +113,15 @@ export const createUserBooking = async (req, res) => {
     console.log("Sending email to user:", userEmailMessage);
     console.log("Sending email to admin:", adminEmailMessage);
 
-    await sendgrid.send(userEmailMessage); // Ensure this is correct
-    await sendgrid.send(adminEmailMessage); // Ensure this is correct
+    await sendgrid.send(userEmailMessage);
+    await sendgrid.send(adminEmailMessage);
 
+    // Create a notification for the client
+    const notification = new Notification({
+      user: adminEmail,
+      message: `You have received a new booking. Check your email for more details.`,
+    });
+    await notification.save();
     res.status(200).json({ message: "Booking created successfully!" });
   } catch (error) {
     console.error("Error creating user booking:", error);
@@ -216,17 +223,32 @@ export const deleteBooking = async (req, res) => {
 // Cleanup expired bookings (bookings where the date has already passed)
 export const cleanupExpiredBookings = async () => {
   try {
-    // Get the current date (today)
-    const today = new Date();
+    // Get the current date and time
+    const now = new Date();
+    const todayDateString = now.toISOString().split("T")[0]; // Get the date part in YYYY-MM-DD format
+    const currentTime = now.getHours() + ":" + now.getMinutes(); // Get the current time in HH:mm format
 
-    // Find and delete all bookings where the date is before today
-    const result = await Booking.deleteMany({ date: { $lt: today } });
+    // Find all bookings for today and before
+    const bookings = await Booking.find({ date: todayDateString });
 
-    if (result.deletedCount > 0) {
-      console.log(`${result.deletedCount} expired bookings deleted.`);
+    for (let booking of bookings) {
+      // Filter out time slots that are already past the current time
+      const updatedTimeSlots = booking.timeSlots.filter((slot) => {
+        // Assuming time slots are in HH:mm format
+        return slot > currentTime; // Keep future time slots
+      });
+
+      // If any time slots were removed, update the booking
+      if (updatedTimeSlots.length !== booking.timeSlots.length) {
+        booking.timeSlots = updatedTimeSlots;
+        await booking.save();
+        console.log(
+          `Expired time slots removed for booking on ${booking.date}`
+        );
+      }
     }
   } catch (error) {
-    console.error("Error cleaning up expired bookings:", error);
+    console.error("Error cleaning up expired time slots:", error);
   }
 };
 

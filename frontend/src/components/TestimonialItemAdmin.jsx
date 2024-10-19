@@ -3,7 +3,7 @@ import StarRating from "./StarRating"; // Import the StarRating component
 
 const TestimonialItem = ({ testimonial }) => {
   return (
-    <div className="border p-4 mb-4 bg-gray-100">
+    <>
       <div className="flex">
         <img
           src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${
@@ -25,7 +25,7 @@ const TestimonialItem = ({ testimonial }) => {
         </div>
       </div>
       <p className="uppercase font-extralight">{testimonial.description}</p>
-    </div>
+    </>
   );
 };
 

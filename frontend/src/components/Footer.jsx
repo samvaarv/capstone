@@ -58,10 +58,10 @@ const Footer = () => {
           </div>
           <div className="w-full lg:w-1/6 px-2 mt-6 pt-9 lg:pt-0 flex justify-center lg:justify-end">
             <a
-              href="mailto:vearshot@gmail.com"
+              href="mailto:vearshotphoto@gmail.com"
               className="uppercase text-xs font-semibold hover:text-secondary"
             >
-              vearshot@gmail.com
+              vearshotphoto@gmail.com
             </a>
           </div>
         </div>

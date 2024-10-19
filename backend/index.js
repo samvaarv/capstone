@@ -5,7 +5,6 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import path from "path";
 import cron from "node-cron";
-import helmet from "helmet";
 import { cleanupExpiredBookings } from "./controllers/bookingController.js";
 
 import { connectDB } from "./db/connectDB.js";
@@ -32,9 +31,10 @@ app.use(bodyParser.json());
 
 app.use(
   cors({
-    origin:[
-      "https://photographer-appointment-booking.onrender.com/" ,
-      "http://localhost:5173"],
+    origin: [
+      "https://photographer-appointment-booking.onrender.com/",
+      "http://localhost:5173",
+    ],
     credentials: true,
     exposedHeaders: [
       "Content-Range",
@@ -54,8 +54,6 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
-
-
 
 // Serve static files from the uploads directory
 app.use(

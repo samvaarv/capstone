@@ -18,36 +18,26 @@ const ProfileForm = () => {
 
   // Fetch the image from the database on component mount
   useEffect(() => {
-    const fetchImageFromDatabase = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/uploads/${user.profileImage}`
-        );
-        if (response.data && response.data.imageUrl) {
-          setPreview(response.data.imageUrl); // Set the existing image URL
-        }
-      } catch (error) {
-        console.error("Error fetching image from database:", error);
-      } finally {
-        setLoading(false); // Stop loading state
-      }
-    };
+    if (!profileImage) {
+      setPreview(undefined);
+      return;
+    }
 
-    fetchImageFromDatabase();
-  }, []);
+    const objectUrl = URL.createObjectURL(profileImage);
+    setPreview(objectUrl);
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [profileImage]);
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-
-    if (file && file.type.startsWith("image/")) {
-      setProfileImage(file); // Set selected file in state
-
-      const filePreviewUrl = URL.createObjectURL(file);
-      setPreview(filePreviewUrl);
-    } else {
-      setProfileImage(null);
-      setPreview(null);
+    if (!e.target.files || e.target.files.length === 0) {
+      setProfileImage(undefined);
+      return;
     }
+
+    // I've kept this example simple by using the first image instead of multiple
+    setProfileImage(e.target.files[0]);
   };
   // Remove the uploaded file
   const handleRemove = () => {

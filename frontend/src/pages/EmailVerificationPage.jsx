@@ -70,7 +70,7 @@ const EmailVerificationPage = () => {
       className="max-w-md w-full mx-auto"
     >
       <div className="p-10 md:py-20">
-        <h2 className="text-3xl md:text-5xl font-bold mb-8 text-center font-light tracking-widest">
+        <h2 className="text-3xl md:text-5xl font-bold mb-8 text-center font-main tracking-widest">
           VERIFY YOUR EMAIL
         </h2>
         <p className="text-center mb-6">
@@ -93,14 +93,14 @@ const EmailVerificationPage = () => {
             ))}
           </div>
           {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}
-          
+
           <button
-              className="w-full py-3 px-16 text-dark hover:text-white border-2 border-dark font-semibold text-xs hover:bg-dark tracking-2 transition duration-200"
-              type="submit"
-              disabled={isLoading || code.some((digit) => !digit)}
-            >
-              {isLoading ? "Verifying..." : "VERIFY EMAIL"}
-            </button>
+            className="w-full py-3 px-16 text-dark hover:text-white border-2 border-dark font-semibold text-xs hover:bg-dark tracking-2 transition duration-200"
+            type="submit"
+            disabled={isLoading || code.some((digit) => !digit)}
+          >
+            {isLoading ? "Verifying..." : "VERIFY EMAIL"}
+          </button>
         </form>
       </div>
     </motion.div>

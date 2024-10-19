@@ -1,7 +1,6 @@
-// components/InstagramSection.jsx
 import React from "react";
 
-const InstagramSection = ({ bigImage, smallImages }) => {
+const InstagramGallery = ({ bigImage, smallImages }) => {
   return (
     <section className="instagram-section relative px-4 sm:px-6 lg:px-8 py-16">
       <div className="instagram-images grid grid-cols-2 sm:grid-cols-4 sm:grid-rows-2 gap-4">
@@ -19,11 +18,14 @@ const InstagramSection = ({ bigImage, smallImages }) => {
           />
         ))}
       </div>
-      <a href="" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <a
+        href=""
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      >
         <button className="btn-circle w-40 h-40">@VEARSHOT</button>
       </a>
     </section>
   );
 };
 
-export default InstagramSection;
+export default InstagramGallery;

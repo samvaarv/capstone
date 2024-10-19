@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-import TestimonialItemAdmin from "../components/TestimonialItemAdmin";
+import TestimonialItemAdmin from "../../components/TestimonialItemAdmin";
 import { toast } from "react-toastify";
 
 const TestimonialManagement = () => {
@@ -67,7 +67,6 @@ const TestimonialManagement = () => {
               <button
                 onClick={() => handleDelete(testimonial)}
                 className="bg-red-500 text-white text-xs uppercase py-2 px-5 hover:bg-red-700 transition"
-
               >
                 Delete
               </button>
@@ -108,14 +107,12 @@ const TestimonialManagement = () => {
               <button
                 onClick={() => setIsModalOpen(false)} // Close confirmation modal
                 className="text-dark text-xs uppercase py-2 px-5 border border-dark hover:text-white hover:bg-dark transition mt-3 mr-2"
-
               >
                 Cancel
               </button>
               <button
                 onClick={confirmDelete} // Confirm delete action
                 className="bg-red-500 text-white text-xs uppercase py-2 px-5 hover:bg-red-700 transition mt-3"
-
               >
                 Delete
               </button>

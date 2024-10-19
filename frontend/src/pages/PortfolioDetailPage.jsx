@@ -30,7 +30,7 @@ const PortfolioDetail = () => {
 
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-      <h1 className="font-light text-3xl md:text-5xl text-center font-bold tracking-widest uppercase mb-20">
+      <h1 className="font-main text-3xl md:text-5xl text-center font-bold tracking-widest uppercase mb-20">
         {portfolio.title}
       </h1>
       <div className="columns-2 md:columns-3 gap-4">

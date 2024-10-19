@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Star, CircleUserRound, Book, EllipsisVertical } from "lucide-react";
 
-import Profile from "../components/Profile";
+import Profile from "../../components/Profile";
 import ClientTestimonial from "./ClientTestimonial";
 import ClientBooking from "./ClientBooking";
 
@@ -39,7 +39,10 @@ const ClientDashboardPage = () => {
               <h1 className="text-xl md:text-lg lg:text-xl uppercase font-bold">
                 Dashboard
               </h1>
-              <button onClick={toggleCollapse} className="md:hidden bg-gray-200 py-2">
+              <button
+                onClick={toggleCollapse}
+                className="md:hidden bg-gray-200 py-2"
+              >
                 <EllipsisVertical className="h-6 w-6 text-gray-700" />
               </button>
             </div>

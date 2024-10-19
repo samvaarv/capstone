@@ -41,7 +41,7 @@ const AboutPage = () => {
           <h2 className="uppercase tracking-2 text-sm mb-5">
             {aboutData.subHeading}
           </h2>
-          <h1 className="font-light text-8xl lg:text-9xl tracking-2 font-bold">
+          <h1 className="font-main text-8xl lg:text-9xl tracking-2 font-bold">
             {aboutData.heading}
           </h1>
         </div>
@@ -57,7 +57,7 @@ const AboutPage = () => {
       </section>
       <section className="md:grid md:grid-cols-12 gap-4 bg-secondary px-6 md:px-0 pb-16 md:pb-0">
         <div className="flex flex-col justify-center col-start-2 col-span-4 text-white py-12">
-          <h2 className="font-light tracking-2 section-title mb-9">
+          <h2 className="font-main tracking-2 section-title mb-9">
             {aboutData.title}
           </h2>
           <p className="font-extralight leading-relaxed">

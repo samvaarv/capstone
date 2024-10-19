@@ -7,7 +7,6 @@ const PortfolioList = () => {
   const [hoverImage, setHoverImage] = useState(""); // Image URL on hover
   const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 }); // Image position state
 
-
   useEffect(() => {
     const fetchPortfolios = async () => {
       try {
@@ -25,7 +24,9 @@ const PortfolioList = () => {
 
   const handleMouseOver = (images, e) => {
     if (images && images.length > 0) {
-      const imageUrl = `${import.meta.env.VITE_BACKEND_URL}/uploads/${images[0]}`; // Set the first image URL
+      const imageUrl = `${import.meta.env.VITE_BACKEND_URL}/uploads/${
+        images[0]
+      }`; // Set the first image URL
       setHoverImage(imageUrl); // Set the hover image
 
       // Calculate image position centered over the text
@@ -43,7 +44,10 @@ const PortfolioList = () => {
   };
 
   return (
-    <section className="relative flex flex-col item-center mx-auto max-w-7xl min-h-svh px-4 sm:px-6 lg:px-8 py-16" onMouseMove={handleMouseMove}>
+    <section
+      className="relative flex flex-col item-center mx-auto max-w-7xl min-h-svh px-4 sm:px-6 lg:px-8 py-16"
+      onMouseMove={handleMouseMove}
+    >
       {hoverImage && ( // Show the image only if hoverImage is not empty
         <div
           className="background-image absolute w-4/12"
@@ -58,7 +62,9 @@ const PortfolioList = () => {
         </div>
       )}
 
-      <h1 className="text-lg font-bold text-center uppercase mb-4">Portfolios</h1>
+      <h1 className="text-lg font-bold text-center uppercase mb-4">
+        Portfolios
+      </h1>
       <ul className="portfolio-list">
         {portfolios.map((portfolio) => (
           <li
@@ -67,7 +73,10 @@ const PortfolioList = () => {
             onMouseOver={(e) => handleMouseOver(portfolio.images, e)} // Pass images and event to hover function
             onMouseLeave={handleMouseLeave}
           >
-            <Link to={`/portfolio/${portfolio._id}`} className="font-light uppercase">
+            <Link
+              to={`/portfolio/${portfolio._id}`}
+              className="font-main uppercase"
+            >
               {portfolio.title}
             </Link>
           </li>

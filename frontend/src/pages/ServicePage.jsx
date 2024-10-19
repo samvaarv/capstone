@@ -36,7 +36,7 @@ const ServicePage = () => {
         </div>
         <div className="col-start-8 col-span-4 pt-8">
           <h2 className="text-xl uppercase font-semibold mb-7">Services</h2>
-          <p className="font-light text-5xl md:text-7xl uppercase">
+          <p className="font-main text-5xl md:text-7xl uppercase">
             I tell stories with photos
           </p>
         </div>
@@ -55,12 +55,18 @@ const ServicePage = () => {
               />
             )}
             <div className="col-start-5 col-span-6 py-8">
-              <h3 className="font-light font-bold text-3xl uppercase mb-6">{service.name}</h3>
+              <h3 className="font-main font-bold text-3xl uppercase mb-6">
+                {service.name}
+              </h3>
               <p className="text-sm">{service.description}</p>
             </div>
             <div className="col-start-11 col-span-2 md:text-right">
-              <p className="font-medium text-lg">${service.price} <small>+ HST</small></p>
-              <span className="font-medium uppercase text-sm">starting price</span>
+              <p className="font-medium text-lg">
+                ${service.price} <small>+ HST</small>
+              </p>
+              <span className="font-medium uppercase text-sm">
+                starting price
+              </span>
               <Link
                 to={`/book-service/${service._id}`}
                 className="mt-4 block text-primary text-primary uppercase underline  underline-offset-2 hover:text-dark transition"

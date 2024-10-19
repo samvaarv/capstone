@@ -24,7 +24,7 @@ const LoginPage = () => {
       className="max-w-md w-full mx-auto"
     >
       <div className="p-10 md:py-20">
-        <h2 className="text-3xl md:text-5xl font-bold mb-8 text-center font-light tracking-widest">
+        <h2 className="text-3xl md:text-5xl font-bold mb-8 text-center font-main tracking-widest">
           LOGIN
         </h2>
 
@@ -72,7 +72,10 @@ const LoginPage = () => {
         <div className="flex justify-center pt-8">
           <p className="text-sm text-dark tracking-2 text-center">
             Don't have an account?{" "}
-            <Link to="/signup" className="text-dark font-semibold hover:underline underline-offset-2">
+            <Link
+              to="/signup"
+              className="text-dark font-semibold hover:underline underline-offset-2"
+            >
               Sign up
             </Link>
           </p>

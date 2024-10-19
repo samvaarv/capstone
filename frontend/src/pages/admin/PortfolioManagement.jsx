@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-import Input from "../components/Input";
+import Input from "../../components/Input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -180,7 +180,7 @@ const PortfolioManagement = () => {
         {/* New Portfolio Form */}
         <form onSubmit={handleSubmit} className="mb-6">
           <Input
-          label="Portfolio Title"
+            label="Portfolio Title"
             type="text"
             placeholder="Portfolio Title"
             value={newTitle}
@@ -214,7 +214,9 @@ const PortfolioManagement = () => {
           ))}
         </div>
 
-        <h3 className="text-xl uppercase font-semibold mb-4">Existing Portfolios</h3>
+        <h3 className="text-xl uppercase font-semibold mb-4">
+          Existing Portfolios
+        </h3>
         {portfolios.length > 0 ? (
           <ul className="space-y-4">
             {portfolios.map((portfolio) => (
@@ -283,7 +285,7 @@ const PortfolioManagement = () => {
                     <h4 className="font-bold uppercase mb-4">
                       {portfolio.title}
                     </h4>
-                    <div className="flex flex flex-wrap w-full mb-4 gap-2 mb-2">
+                    <div className="flex flex-wrap w-full mb-4 gap-2">
                       {portfolio.images.map((image, index) => (
                         <img
                           key={index}
@@ -297,13 +299,13 @@ const PortfolioManagement = () => {
                     </div>
                     <button
                       onClick={() => handleEdit(portfolio)} // Start editing this portfolio
-                      className="text-xs py-2 px-4 text-dark text-sm uppercase hover:text-white hover:bg-dark text-white border-2 border-dark transition duration-200 mr-2"
+                      className="text-xs py-2 px-4 text-dark uppercase hover:text-white hover:bg-dark text-white border-2 border-dark transition duration-200 mr-2"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(portfolio)} // Start deleting this portfolio
-                      className="text-xs py-2 px-4 bg-red-500 text-white text-sm uppercase border-2 border-red-600 hover:bg-red-600 transition duration-200"
+                      className="text-xs py-2 px-4 bg-red-500 text-white uppercase border-2 border-red-600 hover:bg-red-600 transition duration-200"
                     >
                       Delete
                     </button>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-import StarRating from "../components/StarRating";
-import TestimonialItem from "../components/TestimonialItem";
-import Input from "../components/Input";
+import StarRating from "../../components/StarRating";
+import TestimonialItem from "../../components/TestimonialItem";
+import Input from "../../components/Input";
 import { toast } from "react-toastify";
 
 const ClientTestimonial = () => {

@@ -32,7 +32,7 @@ const SignUpPage = () => {
       className="max-w-md w-full mx-auto"
     >
       <div className="p-10 md:py-20">
-        <h2 className="text-3xl md:text-5xl font-bold mb-8 text-center font-light tracking-widest">
+        <h2 className="text-3xl md:text-5xl font-bold mb-8 text-center font-main tracking-widest">
           CREATE AN ACCOUNT
         </h2>
 

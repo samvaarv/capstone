@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import Input from "../components/Input";
+import Input from "../../components/Input";
 
 const ContactManagement = () => {
   const [inquiries, setInquiries] = useState([]);

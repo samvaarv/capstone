@@ -7,7 +7,7 @@ const Footer = () => {
         <h2 className="text-7xl lg:text-9xl text-center">
           <Link
             to="/contact"
-            className="font-light text-dark hover:text-secondary uppercase tracking-1 leading-3 transition"
+            className="font-main text-dark hover:text-secondary uppercase tracking-1 leading-3 transition"
           >
             Let's Fall In Love
           </Link>
@@ -74,7 +74,7 @@ const Footer = () => {
           <ul className="flex flex-wrap justify-center space-x-5">
             <li>
               <a
-                href="http://"
+                href="https://www.instagram.com/vear.bear/"
                 className="text-xs hover:text-primary transition"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -84,7 +84,7 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="http://"
+                href="https://www.facebook.com/samvaarv"
                 className="text-xs hover:text-primary transition"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -94,7 +94,7 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="http://"
+                href="https://ca.pinterest.com/samvaarv/"
                 className="text-xs hover:text-primary transition"
                 target="_blank"
                 rel="noopener noreferrer"

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Input from "../components/Input";
+import Input from "../../components/Input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
@@ -397,14 +397,14 @@ const AboutManagement = () => {
 
             <button
               type="button"
-              className="text-xs py-3 px-10 text-dark text-sm uppercase hover:text-white hover:bg-dark text-white border-2 border-dark transition duration-200 mr-2"
+              className="text-xs py-3 px-10 text-dark uppercase hover:text-white hover:bg-dark text-white border-2 border-dark transition duration-200 mr-2"
               onClick={handleEdit}
             >
               Edit About
             </button>
             <button
               type="button"
-              className="text-xs py-3 px-10 bg-red-500 text-white text-sm uppercase border-2 border-red-600 hover:bg-red-600 transition duration-200"
+              className="text-xs py-3 px-10 bg-red-500 text-white uppercase border-2 border-red-600 hover:bg-red-600 transition duration-200"
               onClick={confirmDelete}
             >
               Delete About

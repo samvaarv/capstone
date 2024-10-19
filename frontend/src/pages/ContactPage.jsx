@@ -49,7 +49,7 @@ const ContactPage = () => {
     <section className="border-b border-dark">
       <div className="md:grid grid-cols-12 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="col-start-1 col-span-2 md:border-r md:border-dark relative h-full pt-16">
-          <h1 className="text-5xl md:text-8xl font-bold mb-8 md:mb-0 font-light tracking-widest text-nowrap md:rotate-90 md:absolute md:left-1/2 md:transform md:origin-left">
+          <h1 className="text-5xl md:text-8xl font-bold mb-8 md:mb-0 font-main tracking-widest text-nowrap md:rotate-90 md:absolute md:left-1/2 md:transform md:origin-left">
             CONTACT ME
           </h1>
         </div>

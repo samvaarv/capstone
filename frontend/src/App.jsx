@@ -1,48 +1,46 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-
-import SignUpPage from "./pages/SignUpPage";
-import LoginPage from "./pages/LoginPage";
-import EmailVerificationPage from "./pages/EmailVerificationPage";
-import DashboardPage from "./pages/DashboardPage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
-
-import PortfolioManagement from "./pages/PortfolioManagement";
-import AboutManagement from "./pages/AboutManagement";
-import ServiceManagement from "./pages/ServiceManagement";
-import BookingManagement from "./pages/BookingManagement";
-import ContactManagement from "./pages/ContactManagement";
-
-import ClientDashboardPage from "./pages/ClientDashboardPage";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-
-import LoadingSpinner from "./components/LoadingSpinner";
-
 import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
+
+import LoadingSpinner from "./components/LoadingSpinner";
+
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import EmailVerificationPage from "./pages/EmailVerificationPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+
+import DashboardPage from "./pages/DashboardPage";
+import AdminHomePageUpdate from "./pages/admin/HomeManagement";
+import TestimonialManagement from "./pages/admin/TestimonialManagement";
+import UserBookingManagement from "./pages/admin/UserBookingManagement";
+import PortfolioManagement from "./pages/admin/PortfolioManagement";
+import AboutManagement from "./pages/admin/AboutManagement";
+import ServiceManagement from "./pages/admin/ServiceManagement";
+import BookingManagement from "./pages/admin/BookingManagement";
+import ContactManagement from "./pages/admin/ContactManagement";
+
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 import HomePage from "./pages/HomePage";
 import ContactPage from "./pages/ContactPage";
 import ServicePage from "./pages/ServicePage";
 import UserBookingPage from "./pages/UserBookingPage";
 import AboutPage from "./pages/AboutPage";
-import PortfolioDetail from "./pages/PortfolioDetail";
-import PortfolioList from "./pages/PortfolioList";
-import Thankyou from "./components/ThankYou";
+import PortfolioDetail from "./pages/PortfolioDetailPage";
+import PortfolioList from "./pages/PortfolioListPage";
 
+import Thankyou from "./components/ThankYou";
 import Profile from "./components/Profile";
-import ProfileForm from "./pages/ProfileForm";
+import ProfileForm from "./components/ProfileForm";
 import ChangePasswordForm from "./pages/ChangePasswordForm";
 
-import ClientBooking from "./pages/ClientBooking";
-import ClientTestimonial from "./pages/ClientTestimonial";
-
-import AdminHomePageUpdate from "./pages/HomeManagement";
-import TestimonialManagement from "./pages/TestimonialManagement";
-import UserBookingManagement from "./pages/UserBookingManagement";
+import ClientDashboardPage from "./pages/client/ClientDashboardPage";
+import ClientBooking from "./pages/client/ClientBooking";
+import ClientTestimonial from "./pages/client/ClientTestimonial";
 
 // protect routes that require authentication
 const ProtectedRoute = ({ children, role }) => {

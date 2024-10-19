@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import InstagramSection from "../components/InstagramSection"; // Assuming you have an InstagramSection component
+import InstagramGallery from "../components/InstagramGallery";
 import StarRating from "../components/StarRating";
 
 const Homepage = () => {
@@ -19,7 +19,6 @@ const Homepage = () => {
     const fetchHomepageData = async () => {
       try {
         const response = await axios.get("/api/homepage");
-        // Ensure the response structure matches your expectations
         if (response.data.success) {
           setHomepageData({
             ...response.data.homepage,
@@ -76,10 +75,10 @@ const Homepage = () => {
             className="col-start-11 col-span-2 row-span-2 mx-auto w-1/3 md:w-full"
           />
           <div className="hero-title-block row-start-2 row-span-4 col-start-4 col-span-6 relative text-center md:text-left mt-5 md:mt-0">
-            <h2 className="hero-title font-light uppercase tracking-wide text-outline">
+            <h2 className="hero-title font-main uppercase tracking-wide text-outline">
               {homepageData.heroTitle}
             </h2>
-            <h2 className="hero-title hero-title-back font-light uppercase tracking-wide absolute inset-0">
+            <h2 className="hero-title hero-title-back font-main uppercase tracking-wide absolute inset-0">
               {homepageData.heroTitle}
             </h2>
           </div>
@@ -123,7 +122,7 @@ const Homepage = () => {
             </Link>
           </div>
           <div className="col-start-7 col-span-5 text-white text-center md:text-left">
-            <h3 className="section-title uppercase font-light mb-6">
+            <h3 className="section-title uppercase font-main mb-6">
               {homepageData.aboutTitle}
             </h3>
             <p className="mb-6">{homepageData.aboutDescription}</p>
@@ -147,7 +146,7 @@ const Homepage = () => {
                   <span className="block text-xs"></span>
                   <Link
                     to={`/portfolio/${portfolio._id}`}
-                    className="font-light uppercase hover:italic"
+                    className="font-main uppercase hover:italic"
                   >
                     {portfolio.title}
                   </Link>
@@ -160,7 +159,9 @@ const Homepage = () => {
       {/* Testimonials Section */}
       <section className="testimonials-section bg-primary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:grid md:grid-cols-12 md:grid-rows-auto">
-          <h2 className="section-title col-start-2 col-span-10 font-light uppercase text-white text-center md:text-left mb-8">Kind words from clients</h2>
+          <h2 className="section-title col-start-2 col-span-10 font-main uppercase text-white text-center md:text-left mb-8">
+            Kind words from clients
+          </h2>
           <div className="slider relative col-start-2 col-span-10 row-start-2">
             {homepageData.testimonials &&
               homepageData.testimonials.map((testimonial, index) => (
@@ -178,7 +179,7 @@ const Homepage = () => {
                         className="col-start-1 col-span-5 row-start-1 row-span-4 w-14 h-14 md:h-full md:w-full -mb-5 mx-auto md:mb-0 object-cover"
                       />
                       <div className="col-start-5 col-span-6 row-start-2 row-span-2 bg-white text-center md:text-left px-5 pt-8 pb-5 md:p-8">
-                        <h3 className="font-light text-xl font-semibold tracking-widest mb-2">
+                        <h3 className="font-main text-xl font-semibold tracking-widest mb-2">
                           {testimonial.user.name}
                         </h3>
                         <StarRating
@@ -193,20 +194,20 @@ const Homepage = () => {
                   )}
                 </div>
               ))}
-              <div className="md:absolute md:right-0 md:top-0 mt-8 md:mt-0 text-center">
-                <button onClick={prevSlide} className="btn-arrow left-arrow me-2">
-                  ❮
-                </button>
-                <button onClick={nextSlide} className="btn-arrow right-arrow">
-                  ❯
-                </button>
-              </div>
+            <div className="md:absolute md:right-0 md:top-0 mt-8 md:mt-0 text-center">
+              <button onClick={prevSlide} className="btn-arrow left-arrow me-2">
+                ❮
+              </button>
+              <button onClick={nextSlide} className="btn-arrow right-arrow">
+                ❯
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Instagram Section */}
-      <InstagramSection
+      <InstagramGallery
         bigImage={homepageData.instagramBigImage}
         smallImages={homepageData.instagramSmallImages}
       />

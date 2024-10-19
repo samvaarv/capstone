@@ -209,31 +209,31 @@ const Navbar = () => {
               <div className="flex flex-col item-center justify-center h-full px-5">
                 <Link
                   to="/"
-                  className="inline-block text-center font-light text-dark uppercase text-2xl md:text-4xl my-4 hover:text-primary transition"
+                  className="inline-block text-center font-main text-dark uppercase text-2xl md:text-4xl my-4 hover:text-primary transition"
                 >
                   Home
                 </Link>
                 <Link
                   to="/portfolio"
-                  className="inline-block text-center font-light text-dark uppercase text-2xl md:text-4xl my-4 hover:text-primary transition"
+                  className="inline-block text-center font-main text-dark uppercase text-2xl md:text-4xl my-4 hover:text-primary transition"
                 >
                   Portfolio
                 </Link>
                 <Link
                   to="/about"
-                  className="inline-block text-center font-light text-dark uppercase text-2xl md:text-4xl my-4 hover:text-primary transition"
+                  className="inline-block text-center font-main text-dark uppercase text-2xl md:text-4xl my-4 hover:text-primary transition"
                 >
                   About
                 </Link>
                 <Link
                   to="/services"
-                  className="inline-block text-center font-light text-dark uppercase text-2xl md:text-4xl my-4 hover:text-primary transition"
+                  className="inline-block text-center font-main text-dark uppercase text-2xl md:text-4xl my-4 hover:text-primary transition"
                 >
                   Services
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-block text-center font-light text-dark uppercase text-2xl md:text-4xl my-4 hover:text-primary transition"
+                  className="inline-block text-center font-main text-dark uppercase text-2xl md:text-4xl my-4 hover:text-primary transition"
                 >
                   Contact
                 </Link>

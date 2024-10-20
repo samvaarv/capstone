@@ -9,6 +9,9 @@ const UserBookingPage = () => {
   const { id } = useParams(); // Service ID from URL
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState("");
+  const [price, setPrice] = useState(0);
+  const [hst, setHst] = useState(0); // Store the HST (13% of price)
+  const [total, setTotal] = useState(0);
   const [availableDates, setAvailableDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [availableSlots, setAvailableSlots] = useState([]);
@@ -43,6 +46,30 @@ const UserBookingPage = () => {
     };
     fetchAvailableDates();
   }, []);
+
+  // Handle service selection from the dropdown
+  const handleServiceChange = (e) => {
+    const selectedServiceId = e.target.value;
+    const service = services.find(
+      (service) => service._id === selectedServiceId
+    );
+
+    if (service) {
+      const servicePrice = service.price;
+      const calculatedHst = servicePrice * 0.13; // Calculate HST (13%)
+      const calculatedTotal = servicePrice + calculatedHst; // Calculate total
+
+      setSelectedService(service);
+      setPrice(servicePrice);
+      setHst(calculatedHst);
+      setTotal(calculatedTotal);
+    } else {
+      setSelectedService(null);
+      setPrice(0);
+      setHst(0);
+      setTotal(0);
+    }
+  };
 
   useEffect(() => {
     if (selectedDate) {
@@ -172,12 +199,14 @@ const UserBookingPage = () => {
                   SELECT A SERVICE
                 </label>
                 <select
-                  value={selectedService}
-                  onChange={(e) => setSelectedService(e.target.value)}
+                  defaultValue=""
+                  onChange={handleServiceChange}
                   required
                   className="w-full pl-3 pr-3 py-2 bg-white bg-opacity-50 border border-dark focus:border-primary text-dark transition duration-200"
                 >
-                  <option value="">Select a service</option>
+                  <option value="" disabled>
+                    Select a service
+                  </option>
                   {services.map((service) => (
                     <option key={service._id} value={service._id}>
                       {service.name}
@@ -284,6 +313,36 @@ const UserBookingPage = () => {
                   <p className="text-red-500 text-xs">{errors.details}</p>
                 )}
               </div>
+              {/* Display selected service price, HST, and total */}
+              {selectedService && (
+                <div className="mb-6 xl:w-10/12">
+                  <table className="uppercase font-main font-light w-full border-2 border-dashed border-slate-500 p-3">
+                    <thead>
+                      <tr>
+                        <th colSpan={2} className="pt-3 pl-2 pr-2">
+                          <h4 className="text-xl font-semibold text-left">
+                            PRICE DETAILS
+                          </h4>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="p-2">Price:</td>
+                        <td className="font-bold p-2">${price.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="p-2">HST (13%):</td>
+                        <td className="font-bold p-2">${hst.toFixed(2)}</td>
+                      </tr>
+                      <tr className="font-bold">
+                        <td className="p-2">Total:</td>
+                        <td className="text-2xl p-2">${total.toFixed(2)}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              )}
               <button
                 className="py-3 px-16 text-dark hover:text-white border-2 border-dark font-semibold text-xs hover:bg-dark tracking-2 transition duration-200"
                 type="submit"

@@ -2,6 +2,7 @@ import Booking from "../models/bookingModel.js";
 import UserBooking from "../models/userBookingModel.js";
 import sendgrid from "@sendgrid/mail";
 import User from "../models/userModel.js";
+import Service from "../models/serviceModel.js";
 import Notification from "../models/notificationModel.js";
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
@@ -91,12 +92,13 @@ export const createUserBooking = async (req, res) => {
 
     // Fetch user and admin emails
     const user = await User.findById(userId);
+    const service = await Service.findById(serviceId);
     const adminEmail = process.env.ADMIN_EMAIL;
 
     // Send email to user
     const userEmailMessage = {
       to: user.email,
-      from: process.env.FROM_EMAIL, // Make sure this email is verified
+      from: process.env.ADMIN_EMAIL,
       subject: "Booking Confirmation",
       text: `Dear ${user.name}, your booking for ${date} at ${timeSlot} has been confirmed.`,
     };
@@ -105,6 +107,7 @@ export const createUserBooking = async (req, res) => {
     const adminEmailMessage = {
       to: adminEmail,
       from: process.env.FROM_EMAIL,
+      replyTo: user.email,
       subject: "New Booking Alert",
       text: `New booking for ${date} at ${timeSlot} by ${user.name}.`,
     };
@@ -115,10 +118,11 @@ export const createUserBooking = async (req, res) => {
 
     await sendgrid.send(userEmailMessage);
     await sendgrid.send(adminEmailMessage);
+
     // Create notification for the user
     const userNotification = new Notification({
       user: user.email,
-      message: "Your booking has been confirmed.",
+      message: `Your booking has been confirmed for ${service.name} on ${date} at ${timeSlot}`,
       type: "booking",
     });
     await userNotification.save();
@@ -126,7 +130,7 @@ export const createUserBooking = async (req, res) => {
     // Create notification for the admin
     const adminNotification = new Notification({
       user: adminEmail,
-      message: `New booking for ${date} at ${timeSlot} by ${user.name}.`,
+      message: `New booking for ${service.name} on ${date} at ${timeSlot} by ${user.name}.`,
       type: "booking",
     });
     await adminNotification.save();

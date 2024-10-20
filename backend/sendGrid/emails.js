@@ -93,10 +93,10 @@ export const sendResetSuccessfulEmail = async (email) => {
 
 export const sendCancellationEmail = async (message) => {
   try {
-      await sgMail.send(message);
-      console.log(`Cancellation email sent to ${message.to}`);
+    await sgMail.send(message);
+    console.log(`Cancellation email sent to ${message.to}`);
   } catch (error) {
-      console.error("Error sending cancellation email:", error);
-      throw new Error("Error sending email");
+    console.error("Error sending cancellation email:", error);
+    throw new Error("Error sending email");
   }
 };

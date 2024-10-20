@@ -115,13 +115,22 @@ export const createUserBooking = async (req, res) => {
 
     await sendgrid.send(userEmailMessage);
     await sendgrid.send(adminEmailMessage);
-
-    // Create a notification for the client
-    const notification = new Notification({
-      user: adminEmail,
-      message: `You have received a new booking. Check your email for more details.`,
+    // Create notification for the user
+    const userNotification = new Notification({
+      user: user.email,
+      message: "Your booking has been confirmed.",
+      type: "booking",
     });
-    await notification.save();
+    await userNotification.save();
+
+    // Create notification for the admin
+    const adminNotification = new Notification({
+      user: adminEmail,
+      message: `New booking for ${date} at ${timeSlot} by ${user.name}.`,
+      type: "booking",
+    });
+    await adminNotification.save();
+
     res.status(200).json({ message: "Booking created successfully!" });
   } catch (error) {
     console.error("Error creating user booking:", error);

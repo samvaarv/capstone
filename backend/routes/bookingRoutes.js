@@ -69,7 +69,7 @@ router.delete("/client/bookings/:id", verifyToken, async (req, res) => {
       // Send cancellation email to the user
       const message = {
         to: user.email,
-        from: process.env.FROM_EMAIL,
+        from: process.env.ADMIN_EMAIL,
         subject: "Booking Cancellation",
         text: `Your booking for ${booking.date} at ${booking.timeSlot} has been cancelled.`,
       };

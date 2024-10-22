@@ -76,7 +76,7 @@ npm run start
 ```
 
 ## Directory Structure
-
+```
 capstone/
 ├── backend/ # Express server and APIs
 │ ├── controllers/ # Controllers for handling API logic
@@ -96,6 +96,7 @@ capstone/
 |
 ├── .env # Global Environment variables
 └── README.md # Project documentation
+```
 
 ## API Endpoints
 

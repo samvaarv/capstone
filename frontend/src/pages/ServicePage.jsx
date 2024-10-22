@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const ServicePage = () => {
   const [services, setServices] = useState([]);
-  const BACKEND_URL = "http://localhost:8888";
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -49,7 +48,9 @@ const ServicePage = () => {
           >
             {service.image && (
               <img
-                src={`${BACKEND_URL}/uploads/${service.image}`}
+                src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${
+                  service.image
+                }`}
                 alt={service.name}
                 className="md:col-span-4 lg:col-span-3 object-cover w-1/3 md:h-full md:w-full"
               />
